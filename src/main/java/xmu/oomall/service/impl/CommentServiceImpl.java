@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public Integer generateID(Comment comment) {
+    public Integer generateId(Comment comment) {
         // TODO: make more intelligent ID generation
         // it also mb generated in DTO
 

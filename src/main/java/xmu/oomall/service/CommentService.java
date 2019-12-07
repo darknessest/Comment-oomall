@@ -19,7 +19,7 @@ public interface CommentService {
      * @param comment
      * @return id 评论id
      */
-    Integer generateID(Comment comment);
+    Integer generateId(Comment comment);
 
     /**
      * 生成评论
@@ -46,13 +46,13 @@ public interface CommentService {
     /**
      * 审核评论
      * 仅针对admin实施
+     * 0：未审核
+     * 1：审核通过
+     * 2：审核失败
      *
      * @param id 评论id
      * @return 审核结果
      * 评论的状态
-     * 0：未审核
-     * 1：审核通过
-     * 2：审核失败
      */
     Integer reviewComment(Integer id, Short statusCode);
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xmu.oomall.dao.CommentDao;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
 
@@ -62,7 +61,7 @@ public class CommentController {
             // TODO: check what is topicId, and is there any way to get it from product information or any other source
             newComment.setTopicId(topicId);
 
-            newComment.setId(commentService.generateID(newComment));
+            newComment.setId(commentService.generateId(newComment));
 
             commentService.makeComment(newComment);
 
