@@ -14,35 +14,35 @@ public interface CommentMapper {
 
 
     /**
-     * 根据id返回订单对象
+     * 根据id返回评论对象
      * @param id 评论id
-     * @return 订单对象，带订单明细
+     * @return 评论对象，带评论明细
      */
     Comment findCommentById(Integer id);
 
     /**
-     * 新增一个订单
-     * @param order 订单对象
+     * 新增一个评论
+     * @param comment 评论对象
      * @return 结果
      */
-    int addComment(Comment order);
+    int addComment(Comment comment);
 
     /**
-     * 删除一个订单
-     * @param comment 订单对象
+     * 删除一个评论
+     * @param comment 评论对象
      * @return 结果
      */
     int deleteComment(Comment comment);
 
     /**
-     * 更新一个订单
-     * @param comment 订单对象
+     * 更新一个评论
+     * @param comment 评论对象
      * @return 结果
      */
     int updateComment(Comment comment);
 
     /**
-     * 用productId获得所有评论
+     * 根据productId获得所有评论
      * @param productId 货品id
      * @return 货品的评论列表
      */

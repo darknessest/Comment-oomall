@@ -43,7 +43,6 @@ public class CommentServiceImpl implements CommentService {
 
         // return the formed integer
         return Integer.parseInt(id);
-
     }
 
     @Override
@@ -56,7 +55,10 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentDao.findCommentById(id);
         /**
          * editing
+         * mb an updated comment should be provided as an argument 
          */
+         
+         commentDao.updateReview(comment);
         return null;
     }
 
@@ -64,10 +66,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Integer reviewComment(Integer id, Short statusCode) {
         Comment comment = commentDao.findCommentById(id);
-        comment.setStatusCode(statusCode);
-
-
-        commentDao.updateReview(comment);
+       
+       
+       	/**
+	     * reviewing
+   	     */
+   	     
+	comment.setStatusCode(statusCode);
+	commentDao.updateReview(comment);
 
         return null;
     }

@@ -16,6 +16,7 @@ import xmu.oomall.util.Config;
  *
  * @author: byl
  * @date: Created in 22:00 2019/12/5
+ * TODO: finish logger
  **/
 @Repository
 public class CommentDao {
@@ -37,29 +38,29 @@ public class CommentDao {
     /**
      * 保存新的评论，包括评论明细
      * @param comment 评论
-     * @return 新评论，带id的
+     * @return 结果
      */
     public Integer saveComment(Comment comment) { return commentMapper.addComment(comment); }
 
     /**
      * 根据id返回评论对象
      * @param id 评论id
-     * @return 订单对象，带订单明细
+     * @return 评论对象，带评论明细
      */
     public Comment findCommentById(Integer id){ return commentMapper.findCommentById(id); }
 
     /**
-     * 根据id返回评论对象
-     * @param userId 评论id
+     * 根据userId返回评论数量
+     * 本来被生成id方法调用的
+     * @param userId 用户id
      * @return 某个用户评论数量
      */
     public Integer numOfCommentsByUser(Integer userId) { return commentMapper.showCommentsByUser(userId).size(); }
 
     /**
-     * 更新评论
-     * comment is partly empty
+     * 更新评论审核
      * @param comment
-     * @return id 评论id
+     * @return 更新结果
      */
-    public Integer updateReview(Comment comment){ return commentMapper.deleteComment(comment); };
+    public Integer updateReview(Comment comment){ return commentMapper.updetComment(comment); };
 }
