@@ -18,6 +18,7 @@ import xmu.oomall.util.Config;
  * @date: Created in 22:00 2019/12/5
  * TODO: finish logger
  **/
+
 @Repository
 public class CommentDao {
 
@@ -62,5 +63,5 @@ public class CommentDao {
      * @param comment
      * @return 更新结果
      */
-    public Integer updateReview(Comment comment){ return commentMapper.updetComment(comment); };
+    public Integer updateReview(Comment comment){ return commentMapper.updateComment(comment); };
 }

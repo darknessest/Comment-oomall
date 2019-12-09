@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xmu.oomall.dao.CommentDao;
 
+import xmu.oomall.dao.CommentDao;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
 import xmu.oomall.util.Config;
@@ -23,9 +23,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     CommentDao commentDao;
-
-    @Autowired
-    Config config;
 
 
     @Override
@@ -57,8 +54,8 @@ public class CommentServiceImpl implements CommentService {
          * editing
          * mb an updated comment should be provided as an argument 
          */
-         
-         commentDao.updateReview(comment);
+
+        commentDao.updateReview(comment);
         return null;
     }
 
@@ -66,14 +63,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Integer reviewComment(Integer id, Short statusCode) {
         Comment comment = commentDao.findCommentById(id);
-       
-       
-       	/**
-	     * reviewing
-   	     */
-   	     
-	comment.setStatusCode(statusCode);
-	commentDao.updateReview(comment);
+
+
+        /**
+         * reviewing
+         */
+
+        comment.setStatusCode(statusCode);
+        commentDao.updateReview(comment);
 
         return null;
     }

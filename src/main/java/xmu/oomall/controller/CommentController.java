@@ -13,10 +13,10 @@ import xmu.oomall.service.CommentService;
  * @author byl
  */
 @RestController
-@RequestMapping(value = "/orders", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
+@RequestMapping(value = "/comments", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 public class CommentController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 
     @Autowired
     private CommentService commentService;
@@ -37,8 +37,9 @@ public class CommentController {
      * TODO: 考虑把参数换到Comment类
      * TODO: finish mapping
      */
-    @PostMapping(path = "/commentCreate", consumes = "", produces = "")
-    Integer createComment(Integer userId, String content, Short star, Integer productId, Integer topicId) {
+    @PostMapping(path = "/commentCreate", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
+//    @RequestMapping(produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
+    public Object createComment(Integer userId, String content, Short star, Integer productId, Integer topicId) {
 
         int creatingStatus = -1, savingStatus = -1;
         Comment newComment = new Comment();
@@ -61,7 +62,7 @@ public class CommentController {
             // TODO: check what is topicId, and is there any way to get it from product information or any other source
             newComment.setTopicId(topicId);
 
-            newComment.setId(commentService.generateId(newComment));
+            newComment.setId(111111432);
 
             commentService.makeComment(newComment);
 
@@ -69,7 +70,7 @@ public class CommentController {
         }
 
 
-        return creatingStatus;
+        return newComment;
     }
 
 }

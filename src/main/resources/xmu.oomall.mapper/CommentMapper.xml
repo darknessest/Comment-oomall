@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="xmu.oomall.mapper.CouponMapper">
+<mapper namespace="xmu.oomall.mapper.CommentMapper">
 
-    <select id="findCommentById" parameterType="Integer" resultType="coupon">
+    <select id="findCommentById" parameterType="Integer" resultType="comment">
             select id,
                 userId,
                 content,
@@ -14,24 +14,23 @@
                 gmtCreate,
                 gmtModified,
                 beDeleted
-            from oomall_comment where id = #{id}
+            from comment where id = #{id}
     </select>
 
-    <!--    TODO: check in what table comments are stored -->
+    <!--    TODO: finish functions -->
     <!--    TODO: fix parameterType -->
-    <insert id="addComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into oomall_comment(id, userId,content,statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
-        values (#{},#{},#{},#{},#{},#{},#{},#{},#{},#{},#{})
+    <insert id="addComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment(id, userId, content, statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
+        values (#{id},#{userId},#{content},#{statusCode},#{type},#{star},#{productId},#{topicId},#{gmtCreate},#{gmtModified},#{beDeleted})
     </insert>
 
     <insert id="deleteComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into oomall_comment(id, userId,content,statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
-        values (#{},#{},#{},#{},#{},#{},#{},#{},#{},#{},#{})
+        delete from comment where id = #{id}
     </insert>
 
     <insert id="updateComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into oomall_comment(id, userId,content,statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
-        values (#{},#{},#{},#{},#{},#{},#{},#{},#{},#{},#{})
+        insert into comment(id, userId,content,statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
+        values (#{id},#{user_id},#{content},#{status},#{type},#{star},#{product_id},#{topic_id},#{gmt_create},#{gmt_modified},#{is_deleted})
     </insert>
 
     <insert id="showCommentsByProduct" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
@@ -61,7 +60,7 @@
                 gmtCreate,
                 gmtModified,
                 beDeleted
-            from oomall_comment where id = #{id}
+            from comment where id = #{id}
     </insert>
 
 

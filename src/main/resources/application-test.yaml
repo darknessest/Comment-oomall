@@ -2,7 +2,7 @@
 spring:
   datasource:
     #JDBC驱动的名称
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     #数据库的JDBC url
     url: jdbc:h2:mem:test;MODE=MYSQL
     #数据库用户名

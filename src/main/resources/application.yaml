@@ -40,7 +40,7 @@ logging:
     xmu.oomall.util: debug
   #使用logback日志，取代默认的common日志
   file:
-    path: C:\Users\Ming Qiu\log
+    path: log
   config: classpath:logback-spring.xml
 
 oomall:
