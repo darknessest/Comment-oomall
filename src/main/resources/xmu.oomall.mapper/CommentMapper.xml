@@ -3,24 +3,14 @@
 <mapper namespace="xmu.oomall.mapper.CommentMapper">
 
     <select id="findCommentById" parameterType="Integer" resultType="comment">
-            select id,
-                userId,
-                content,
-                statusCode,
-                type,
-                star,
-                productId,
-                topicId,
-                gmtCreate,
-                gmtModified,
-                beDeleted
+            select *
             from comment where id = #{id}
     </select>
 
     <!--    TODO: finish functions -->
     <!--    TODO: fix parameterType -->
     <insert id="addComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into comment(id, userId, content, statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
+        insert into comment(id, userId, content, statusCode, type, star, productId, topicId, gmtCreate, gmtModified, beDeleted )
         values (#{id},#{userId},#{content},#{statusCode},#{type},#{star},#{productId},#{topicId},#{gmtCreate},#{gmtModified},#{beDeleted})
     </insert>
 
@@ -30,7 +20,8 @@
 
     <insert id="updateComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
         insert into comment(id, userId,content,statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
-        values (#{id},#{user_id},#{content},#{status},#{type},#{star},#{product_id},#{topic_id},#{gmt_create},#{gmt_modified},#{is_deleted})
+        values (:id,:user_id,:content,:status,:type,:star,:product_id,:topic_id,:gmt_create,:gmt_modified,:is_deleted )
+--         values (#{id},#{user_id},#{content},#{status},#{type},#{star},#{product_id},#{topic_id},#{gmt_create},#{gmt_modified},#{is_deleted})
     </insert>
 
     <insert id="showCommentsByProduct" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">

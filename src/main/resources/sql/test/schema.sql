@@ -86,7 +86,7 @@ CREATE TABLE `coupon_rule` (
   `pic_url` varchar(255) DEFAULT NULL,
   `brief` varchar(10) DEFAULT NULL,
   `valid_period` int(11) DEFAULT NULL,
-  `goods_ids1` varchar(5000) DEFAULT NULL,
+  `goods_ids` varchar(5000) DEFAULT NULL,
   `add_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `be_deleted` tinyint(1) DEFAULT NULL,
@@ -317,3 +317,35 @@ INSERT INTO `promotion` VALUES (1,'2019-12-01 09:14:38','2019-12-07 09:14:56','p
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-12-01 11:31:04
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+
+
+CREATE TABLE `comment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `status_code` tinyint(1) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT NULL,
+  `star` tinyint(1) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `topic_id` int(11) DEFAULT NULL,
+  `gmt_create` datetime DEFAULT NULL,
+  `gmt_modified` datetime DEFAULT NULL,
+  `be_deleted` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comment_id_index` (`id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+INSERT INTO `comment`(id, user_id, content, status_code, type, star, product_id, topic_id) VALUES (10011, 123, 'Great product!', 2, 4, 5, 12412, 22);
+
+--
+-- Dumping data for table `comment`
+--

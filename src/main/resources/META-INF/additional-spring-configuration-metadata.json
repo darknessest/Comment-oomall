@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.profiles.jpa.hibernate.naming.physical-strategy",
+      "type": "java.lang.String",
+      "description": "Description for spring.profiles.jpa.hibernate.naming.physical-strategy."
+  }
+] }

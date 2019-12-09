@@ -1,48 +1,65 @@
 package xmu.oomall.domain;
 
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+//import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * @Author: 数据库与对象模型标准组
- * @Description:评论
- * @Data:Created in 14:50 2019/11/29
+ * @Description: 评论
+ * @Data: Created in 14:50 2019/11/29
  * @Modified By:
  **/
 
+//@Entity
+//@Table(name = "comment")
 public class Comment {
+
+//    @Column(name = "comment_id")
     private Integer id;
     /**
      * 发表评论的用户的id
      */
+
+//    @Column(name = "user_id")
     private Integer userId;
     /**
      * 发表评论的内容
      */
+//    @Column(name = "content")
     private String content;
     /**
      * 评论的状态 0：未审核 1：审核通过 2：审核失败
      */
+//    @Column(name = "status_code")
     private Short statusCode;
     /**
      * 发表评论的类型
      */
+//    @Column(name = "type")
     private Short type;
     /**
      * 发表评论的星级
      */
+//    @Column(name = "star")
     private Short star;
     /**
      * 评论的产品的id
      */
+//    @Column(name = "product_id")
     private Integer productId;
     /**
      * 评论的专题的id
      */
+//    @Column(name = "topic_id")
     private Integer topicId;
-
+//    @Column(name = "gmt_create")
     private LocalDateTime gmtCreate;
+//    @Column(name = "gmt_modified")
     private LocalDateTime gmtModified;
+//    @Column(name = "be_deleted")
     private Boolean beDeleted;
 
     @Override
@@ -64,8 +81,12 @@ public class Comment {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {return true;}
-        if (o == null || getClass() != o.getClass()) {return false;}
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Comment comment = (Comment) o;
         return Objects.equals(id, comment.id);
     }

@@ -41,7 +41,10 @@ public class CommentDao {
      * @param comment 评论
      * @return 结果
      */
-    public Integer saveComment(Comment comment) { return commentMapper.addComment(comment); }
+    public Integer saveComment(Comment comment) {
+        logger.debug("CommentDao: trying to add a comment with commentMapper");
+        return commentMapper.addComment(comment);
+    }
 
     /**
      * 根据id返回评论对象
