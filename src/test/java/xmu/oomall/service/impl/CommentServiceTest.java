@@ -7,6 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import xmu.oomall.OoMallApplication;
 import xmu.oomall.dao.CommentDao;
+import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
 
 
@@ -24,10 +25,11 @@ class CommentServiceTest {
 
     @Test
     void reviewTest() {
-        System.out.println("Before: ");
-        System.out.println(commentDao.findCommentById(10011));
+        Comment cmnt = commentDao.findCommentById(10011);
+        System.out.println("Before: " + cmnt);
 
-        commentService.reviewComment(10011, (short) 0);
+        cmnt.setStatusCode((short) 0);
+        commentService.editComment(cmnt);
 
         System.out.println("After: ");
         System.out.println(commentDao.findCommentById(10011));

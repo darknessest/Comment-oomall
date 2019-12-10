@@ -61,7 +61,7 @@ public class CommentControllerTest {
     @Test
     void commentCreationTest() throws Exception {
         // in case it exists
-        commentDao.deleteComment(234568317);
+        commentDao.deleteComment(56832341);
 
         Comment cmnt = new Comment();
         cmnt.setContent("Trying out this comment");
@@ -82,6 +82,7 @@ public class CommentControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andReturn().getResponse().getContentAsString();
 
+        System.out.println(commentDao.findCommentById(56832341));
         System.out.println(responseString);
     }
 

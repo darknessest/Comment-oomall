@@ -4,14 +4,13 @@ spring:
     #JDBC驱动的名称
     driver-class-name: com.mysql.cj.jdbc.Driver
     #数据库的JDBC url
-#    url: jdbc:h2:mem:test;MODE=MYSQL
-
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:h2:mem:test;MODE=MYSQL
+#    url: jdbc:mysql://localhost:3306/test
     #数据库用户名
     data-username: root
-    username: root
+#    username: root
     #数据库密码
-    password: jklo987u
+    password:
     #建表的SQL
     schema: classpath:sql/test/schema.sql
     #当数据库为内嵌数据库时，如h2，则执行初始化SQL
