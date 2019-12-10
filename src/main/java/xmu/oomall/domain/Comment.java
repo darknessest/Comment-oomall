@@ -1,8 +1,5 @@
 package xmu.oomall.domain;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-//import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

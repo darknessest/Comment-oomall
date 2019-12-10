@@ -1,9 +1,5 @@
 package xmu.oomall.controller.vo;
 
-import xmu.oomall.domain.Comment;
-
-import java.util.List;
-
 /**
  * @author byl
  * get /commentCreate 方法的VO

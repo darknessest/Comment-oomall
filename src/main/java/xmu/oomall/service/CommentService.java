@@ -43,18 +43,6 @@ public interface CommentService {
      */
     Integer editComment(Comment id);
 
-    /**
-     * 审核评论
-     * 仅针对admin实施
-     * 0：未审核
-     * 1：审核通过
-     * 2：审核失败
-     *
-     * @param id 评论id
-     * @return 审核结果
-     * 评论的状态
-     */
-    Integer reviewComment(Integer id, Short statusCode);
 
     /**
      * 根据productId获得所有评论

@@ -52,7 +52,6 @@ public interface CommentMapper {
      * 用userId获得所有评论
      * @param userId 货品id
      * @return 用户的评论列表
-     * TODO: if not used outside of CommentDao, replace with comments counting
      */
     List<Comment> showCommentsByUser(Integer userId);
 

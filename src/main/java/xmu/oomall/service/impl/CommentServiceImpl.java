@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Integer generateId(Comment comment) {
-        /**
+        /*
          * TODO: make more intelligent ID generation
          * it also mb generated in DTO
          */
@@ -66,39 +66,12 @@ public class CommentServiceImpl implements CommentService {
         return null;
     }
 
-
-    @Override
-    public Integer reviewComment(Integer id, Short statusCode) {
-        Comment comment = commentDao.findCommentById(id);
-        LocalDateTime localDateTime = LocalDateTime.now();
-        comment.setGmtModified(localDateTime);
-
-        logger.debug("comment id for update: " + id);
-        logger.debug("received statusCode: " + statusCode);
-        comment.setStatusCode(statusCode);
-        commentDao.updateComment(comment);
-
-        return null;
-    }
-
-    /**
-     * 根据productId获得所有评论
-     *
-     * @param userId 货品id
-     * @return 货品的评论列表
-     */
     @Override
     public List<Comment> showCommentsByUser(Integer userId) {
         logger.debug("Trying to get all products with userId: " + userId);
         return commentDao.showCommentsByUser(userId);
     }
 
-    /**
-     * 根据productId获得所有评论
-     *
-     * @param productId 货品id
-     * @return 货品的评论列表
-     */
     @Override
     public List<Comment> showCommentsByProduct(Integer productId) {
         logger.debug("Trying to get all products with productId: " + productId);

@@ -9,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import xmu.oomall.OoMallApplication;
-import xmu.oomall.controller.vo.CommentVo;
 import xmu.oomall.dao.CommentDao;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.util.JacksonUtil;

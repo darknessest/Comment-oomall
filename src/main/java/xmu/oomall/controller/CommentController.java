@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xmu.oomall.controller.vo.CommentRetVo;
-import xmu.oomall.controller.vo.CommentVo;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
 import xmu.oomall.util.ResponseUtil;
@@ -47,19 +46,6 @@ public class CommentController {
         }
 
         return retObj;
-    }
-
-    /**
-     * 审核评论
-     *
-     * @param commentId
-     * @param statusCode
-     */
-    @PutMapping(path = "/{commentId}/review", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-    public void reviewComment(@PathVariable Integer commentId, @RequestParam("statusCode") Short statusCode) {
-        logger.debug("starting to review comment with id: " + commentId.toString() + " and new status code: " + statusCode.toString());
-
-        commentService.reviewComment(commentId, statusCode);
     }
 
     /**
