@@ -13,53 +13,40 @@ import java.util.Objects;
  * @Modified By:
  **/
 
-//@Entity
-//@Table(name = "comment")
 public class Comment {
 
-//    @Column(name = "comment_id")
     private Integer id;
     /**
      * 发表评论的用户的id
      */
-
-//    @Column(name = "user_id")
     private Integer userId;
     /**
      * 发表评论的内容
      */
-//    @Column(name = "content")
     private String content;
     /**
      * 评论的状态 0：未审核 1：审核通过 2：审核失败
      */
-//    @Column(name = "status_code")
     private Short statusCode;
     /**
      * 发表评论的类型
      */
-//    @Column(name = "type")
     private Short type;
     /**
      * 发表评论的星级
      */
-//    @Column(name = "star")
     private Short star;
     /**
      * 评论的产品的id
      */
-//    @Column(name = "product_id")
     private Integer productId;
     /**
      * 评论的专题的id
      */
-//    @Column(name = "topic_id")
     private Integer topicId;
-//    @Column(name = "gmt_create")
+
     private LocalDateTime gmtCreate;
-//    @Column(name = "gmt_modified")
     private LocalDateTime gmtModified;
-//    @Column(name = "be_deleted")
     private Boolean beDeleted;
 
     @Override

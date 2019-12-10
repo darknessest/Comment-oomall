@@ -9,6 +9,7 @@ import xmu.oomall.dao.CommentDao;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,24 +36,31 @@ public class CommentServiceImpl implements CommentService {
 
         String productId = Integer.toString(comment.getProductId());
         String topicId = Integer.toString(comment.getTopicId());
-        String userId = Integer.toString(comment.getId());
+        String userId = Integer.toString(comment.getUserId());
 
         String numOfcomments = Integer.toString(commentDao.showCommentsByUser(comment.getUserId()).size() + 1);
 
         String id = productId + topicId + userId + numOfcomments;
         // String id = "" + productId + topicId + userId + numOfcomments;
-
+        logger.debug("Newly generated Id: " + id);
         // return the formed integer
         return Integer.parseInt(id);
     }
 
     @Override
     public Integer makeComment(Comment comment) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        comment.setGmtCreate(localDateTime);
+        comment.setId(generateId(comment));
+
         return commentDao.saveComment(comment);
     }
 
     @Override
     public Integer editComment(Comment comment) {
+        logger.debug("comment id for editing: " + comment);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        comment.setGmtModified(localDateTime);
 
         commentDao.updateComment(comment);
         return null;
@@ -62,11 +70,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Integer reviewComment(Integer id, Short statusCode) {
         Comment comment = commentDao.findCommentById(id);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        comment.setGmtModified(localDateTime);
 
-
-        /**
-         * reviewing
-         */
         logger.debug("comment id for update: " + id);
         logger.debug("received statusCode: " + statusCode);
         comment.setStatusCode(statusCode);

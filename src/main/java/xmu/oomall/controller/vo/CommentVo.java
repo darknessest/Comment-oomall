@@ -1,21 +1,56 @@
 package xmu.oomall.controller.vo;
 
-import java.math.BigDecimal;
+import xmu.oomall.domain.Comment;
+
+import java.util.List;
 
 /**
  * @author byl
- * get /commentCreate 方法返回的VO
+ * get /commentCreate 方法的VO
  */
 public class CommentVo {
+
     private Integer id;
-    /**
-     * 发表评论的用户的id
-     */
     private Integer userId;
+    private String content;
+    private Short statusCode;
+    private Short type;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Short getStatusCode() {
+        return statusCode;
+    }
+
+    public Short getType() {
+        return type;
+    }
+
+    public Short getStar() {
+        return star;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public Integer getTopicId() {
+        return topicId;
+    }
 
     @Override
     public String toString() {
-        return "CommentCreateVo{" +
+        return "CommentVo{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
@@ -26,31 +61,6 @@ public class CommentVo {
                 ", topicId=" + topicId +
                 '}';
     }
-
-    /**
-     * 发表评论的内容
-     */
-    private String content;
-    /**
-     * 评论的状态 0：未审核 1：审核通过 2：审核失败
-     */
-    private Short statusCode;
-    /**
-     * 发表评论的类型
-     */
-    private Short type;
-    /**
-     * 发表评论的星级
-     */
-    private Short star;
-    /**
-     * 评论的产品的id
-     */
-    private Integer productId;
-    /**
-     * 评论的专题的id
-     */
-    private Integer topicId;
 
     public void setId(Integer id) {
         this.id = id;
@@ -84,37 +94,11 @@ public class CommentVo {
         this.topicId = topicId;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    private Short star;
 
-    public Integer getUserId() {
-        return userId;
-    }
+    private Integer productId;
 
-    public String getContent() {
-        return content;
-    }
-
-    public Short getStatusCode() {
-        return statusCode;
-    }
-
-    public Short getType() {
-        return type;
-    }
-
-    public Short getStar() {
-        return star;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public Integer getTopicId() {
-        return topicId;
-    }
+    private Integer topicId;
 }
 
 

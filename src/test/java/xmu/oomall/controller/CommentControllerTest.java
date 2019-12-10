@@ -10,11 +10,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import xmu.oomall.OoMallApplication;
 import xmu.oomall.controller.vo.CommentVo;
-import xmu.oomall.mapper.CommentMapper;
+import xmu.oomall.dao.CommentDao;
+import xmu.oomall.domain.Comment;
 import xmu.oomall.util.JacksonUtil;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,12 +28,25 @@ public class CommentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private CommentDao commentDao;
+
+
     @Test
-    void getCommentTest() throws Exception {
+    void getCommentsByProductIdTest() throws Exception {
 
-        CommentVo vo = new CommentVo();
+        String responseString = this.mockMvc.perform(get("/123/comments").contentType("application/json;charset=UTF-8"))
+//                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andReturn().getResponse().getContentAsString();
 
-        String jsonString = JacksonUtil.toJson(vo);
+
+        System.out.println(responseString);
+    }
+
+    @Test
+    void getCommentsByUserIdTest() throws Exception {
 
         String responseString = this.mockMvc.perform(get("/product/12412/comments").contentType("application/json;charset=UTF-8"))
 //                .andDo(print())
@@ -42,10 +55,55 @@ public class CommentControllerTest {
                 .andReturn().getResponse().getContentAsString();
 
 
-        String content = JacksonUtil.parseString(responseString, "content");
-//        Integer fee = JacksonUtil.parseInteger(data, "fee");
-//        System.out.println("");
-        System.out.println(content);
+        System.out.println(responseString);
+    }
 
+
+    @Test
+    void commentCreationTest() throws Exception {
+        // in case it exists
+        commentDao.deleteComment(234568317);
+
+        Comment cmnt = new Comment();
+        cmnt.setContent("Trying out this comment");
+        cmnt.setId(0);
+        cmnt.setProductId(56);
+        cmnt.setStar((short) 5);
+        cmnt.setStatusCode((short) 2);
+        cmnt.setTopicId(83);
+        cmnt.setType((short) 1);
+        cmnt.setUserId(234);
+
+
+        String jsonString = JacksonUtil.toJson(cmnt);
+
+        String responseString = this.mockMvc.perform(post("/commentCreate").accept(MediaType.APPLICATION_JSON).contentType("application/json;charset=UTF-8").content(jsonString))
+//                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andReturn().getResponse().getContentAsString();
+
+        System.out.println(responseString);
+    }
+
+
+    @Test
+    void commentEditingTest() throws Exception {
+        Comment cmnt = commentDao.findCommentById(10011);
+        System.out.println("Before: " + cmnt);
+        cmnt.setContent("Bad");
+        cmnt.setStar((short) 1);
+        cmnt.setStatusCode((short) 1);
+        String jsonString = JacksonUtil.toJson(cmnt);
+
+
+        String responseString = this.mockMvc.perform(put("/comments/10011").accept(MediaType.APPLICATION_JSON).contentType("application/json;charset=UTF-8").content(jsonString))
+//                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andReturn().getResponse().getContentAsString();
+
+        System.out.println("After: " + commentDao.findCommentById(10011));
+        System.out.println(responseString);
     }
 }

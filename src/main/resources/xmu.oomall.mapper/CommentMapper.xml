@@ -29,14 +29,14 @@
         where id = #{id}
     </update>
 
-    <select id="showCommentsByProduct" parameterType="Integer">
+    <select id="showCommentsByProduct" parameterType="Integer" resultType="xmu.oomall.domain.Comment">
             select *
-            from comment where productId = #{product_id}
+            from comment where product_id = #{productId}
     </select>
 
-    <select id="showCommentsByUser" parameterType="Integer">
+    <select id="showCommentsByUser" parameterType="Integer" resultType="xmu.oomall.domain.Comment">
             select *
-            from comment where userId = #{user_id}
+            from comment where user_id = #{userId}
     </select>
 
 

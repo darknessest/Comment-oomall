@@ -3,10 +3,9 @@ package xmu.oomall.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import xmu.oomall.controller.vo.CommentRetVo;
+import xmu.oomall.controller.vo.CommentVo;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
 import xmu.oomall.util.ResponseUtil;
@@ -28,51 +27,26 @@ public class CommentController {
     /**
      * 更新数据库中的货品库存量
      *
-     * @param userId
-     * @param productId
-     * @param topicId
-     * @param content
-     * @param star
+     * @param comment
      * @return 更改结果
      * 0    - saved successfully
      * 1    - not saved
      * -1   - error
      */
     @PostMapping(path = "/commentCreate", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-    public Integer createComment(Integer userId, String content, Short star, Integer productId, Integer topicId) {
+    public Object createComment(@RequestBody Comment comment) {
+        Object retObj;
 
-        int creatingStatus = 0;
-        Comment newComment = new Comment();
-
-        if (userId != null && productId != null) {
-            newComment.setUserId(userId);
-            logger.debug("User with ID: " + userId + " creates new comment");
-
-            newComment.setContent(content);
-            logger.debug("Setting content");
-
-            newComment.setType((short) 0);
-            logger.debug("Setting stars");
-
-            newComment.setStar(star);
-            logger.debug("Setting Stars");
-
-            newComment.setProductId(productId);
-            logger.debug("Setting product id");
-
-            // TODO: check what is topicId, and is there any way to get it from product information or any other source
-            newComment.setTopicId(topicId);
-            logger.debug("Setting topic id");
-
-            newComment.setId(commentService.generateId(newComment));
-            logger.debug("Newly generated id: " + newComment.getId());
-
-            logger.debug("Passing new comment to service");
-            commentService.makeComment(newComment);
-
-            creatingStatus = 1;
+        if (comment.getUserId() != null && comment.getProductId() != null) {
+            logger.debug("Comment: " + comment.toString() + " has been received in controller");
+            commentService.makeComment(comment);
+            retObj = ResponseUtil.ok();
+        } else {
+            logger.debug("Comment: " + comment.toString() + " is empty or corrupted, so it hasn't been added");
+            retObj = ResponseUtil.badArgument();
         }
-        return creatingStatus;
+
+        return retObj;
     }
 
     /**
@@ -81,11 +55,32 @@ public class CommentController {
      * @param commentId
      * @param statusCode
      */
-    @PostMapping(path = "/{commentId}/review", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-    public void reviewComment(Integer commentId, Short statusCode) {
-        logger.debug("starting to review comment");
-        commentService.reviewComment(commentId, statusCode);
+    @PutMapping(path = "/{commentId}/review", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
+    public void reviewComment(@PathVariable Integer commentId, @RequestParam("statusCode") Short statusCode) {
+        logger.debug("starting to review comment with id: " + commentId.toString() + " and new status code: " + statusCode.toString());
 
+        commentService.reviewComment(commentId, statusCode);
+    }
+
+    /**
+     * 更新评论，审核
+     *
+     * @param comment
+     */
+    @PutMapping(path = "/comments/{commentId}", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
+    public Object updateComment(@RequestBody Comment comment) {
+        Object retObj;
+
+        if (comment.getUserId() != null && comment.getProductId() != null) {
+            logger.debug("Comment: " + comment.toString() + " has been received in controller");
+            commentService.editComment(comment);
+            retObj = ResponseUtil.ok();
+        } else {
+            logger.debug("Comment: " + comment.toString() + " is empty or corrupted, so it hasn't been edited");
+            retObj = ResponseUtil.badArgument();
+        }
+
+        return retObj;
     }
 
     /**
@@ -94,10 +89,24 @@ public class CommentController {
      * @param userId
      */
     @GetMapping("/{userId}/comments")
-    void getUserComments(Integer userId) {
+    public Object getUserComments(@PathVariable Integer userId) {
+        Object retObj;
+        CommentRetVo retVO = new CommentRetVo();
+
         logger.debug("starting to show comments by user");
         List<Comment> userComments = commentService.showCommentsByUser(userId);
 
+        if (userComments.isEmpty()) {
+            retObj = ResponseUtil.badArgument();
+            return retObj;
+        } else {
+            logger.debug("received comments by productId isn't empty!");
+        }
+        retVO.setCommentList(userComments);
+
+        retObj = ResponseUtil.ok(retVO);
+
+        return retObj;
     }
 
     /**
@@ -106,18 +115,22 @@ public class CommentController {
      * @param productId
      */
     @GetMapping("/product/{productId}/comments")
-    public Object getProductComments(Integer productId) {
-        Object retObj = null;
+    public Object getProductComments(@PathVariable Integer productId) {
+        Object retObj;
+        CommentRetVo retVO = new CommentRetVo();
 
-        logger.debug("starting to show comments by product");
+        logger.debug("starting to show comments by productId");
         List<Comment> productComments = commentService.showCommentsByProduct(productId);
 
         if (productComments.isEmpty()) {
             retObj = ResponseUtil.badArgument();
             return retObj;
+        } else {
+            logger.debug("received comments by productId isn't empty!");
         }
+        retVO.setCommentList(productComments);
 
-        retObj = ResponseUtil.ok(retObj);
+        retObj = ResponseUtil.ok(retVO);
 
         return retObj;
     }
