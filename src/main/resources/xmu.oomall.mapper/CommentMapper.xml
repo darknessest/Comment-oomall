@@ -24,6 +24,8 @@
             star = #{star},
             product_id = #{productId},
             topic_id = #{topicId},
+            be_deleted = #{beDeleted},
+            gmt_modified = #{gmtModified},
             be_deleted = #{beDeleted}
         where id = #{id}
     </update>
