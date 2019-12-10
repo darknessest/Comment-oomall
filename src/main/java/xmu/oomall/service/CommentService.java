@@ -41,7 +41,7 @@ public interface CommentService {
      * 1：not edited
      * -1：error
      */
-    Integer editComment(Integer id);
+    Integer editComment(Comment id);
 
     /**
      * 审核评论
@@ -55,5 +55,19 @@ public interface CommentService {
      * 评论的状态
      */
     Integer reviewComment(Integer id, Short statusCode);
+
+    /**
+     * 根据productId获得所有评论
+     * @param userId 货品id
+     * @return 货品的评论列表
+     */
+    List<Comment> showCommentsByUser(Integer userId);
+
+    /**
+     * 根据productId获得所有评论
+     * @param productId 货品id
+     * @return 货品的评论列表
+     */
+    List<Comment> showCommentsByProduct(Integer productId);
 
 }

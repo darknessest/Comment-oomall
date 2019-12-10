@@ -28,17 +28,31 @@ class CommentDaoTest {
     }
 
     @Test
+    void deleteTest() {
+        System.out.println("Before: ");
+        System.out.println(commentDao.findCommentById(10011));
+
+        commentDao.deleteComment(10011);
+
+        System.out.println("After: ");
+        System.out.println(commentDao.findCommentById(10011));
+    }
+
+
+    @Test
     void saveCommentTest() {
         Comment cmnt = new Comment();
-        cmnt.setId(1);
+        cmnt.setId(1232321);
         cmnt.setUserId(123);
         cmnt.setStar((short) 3);
-        cmnt.setContent("Great product!");
-        cmnt.setType((short) 3);
+        cmnt.setContent("Cool stuff!");
+        cmnt.setType((short) 2);
         cmnt.setProductId(533);
         cmnt.setStatusCode((short) 0);
 
         commentDao.saveComment(cmnt);
+
+        System.out.println("new comment: " + commentDao.findCommentById(1232321));
 
     }
 }

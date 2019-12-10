@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import xmu.oomall.dao.CommentDao;
 import xmu.oomall.domain.Comment;
 import xmu.oomall.service.CommentService;
-import xmu.oomall.util.Config;
+
+import java.util.List;
 
 /**
  * @author: byl
@@ -27,13 +28,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Integer generateId(Comment comment) {
-        // TODO: make more intelligent ID generation
-        // it also mb generated in DTO
+        /**
+         * TODO: make more intelligent ID generation
+         * it also mb generated in DTO
+         */
 
         String productId = Integer.toString(comment.getProductId());
         String topicId = Integer.toString(comment.getTopicId());
         String userId = Integer.toString(comment.getId());
-        String numOfcomments = Integer.toString(commentDao.numOfCommentsByUser(comment.getUserId()) + 1);
+
+        String numOfcomments = Integer.toString(commentDao.showCommentsByUser(comment.getUserId()).size() + 1);
 
         String id = productId + topicId + userId + numOfcomments;
         // String id = "" + productId + topicId + userId + numOfcomments;
@@ -48,14 +52,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Integer editComment(Integer id) {
-        Comment comment = commentDao.findCommentById(id);
-        /**
-         * editing
-         * mb an updated comment should be provided as an argument 
-         */
+    public Integer editComment(Comment comment) {
 
-        commentDao.updateReview(comment);
+        commentDao.updateComment(comment);
         return null;
     }
 
@@ -68,12 +67,35 @@ public class CommentServiceImpl implements CommentService {
         /**
          * reviewing
          */
-
+        logger.debug("comment id for update: " + id);
+        logger.debug("received statusCode: " + statusCode);
         comment.setStatusCode(statusCode);
-        commentDao.updateReview(comment);
+        commentDao.updateComment(comment);
 
         return null;
     }
 
+    /**
+     * 根据productId获得所有评论
+     *
+     * @param userId 货品id
+     * @return 货品的评论列表
+     */
+    @Override
+    public List<Comment> showCommentsByUser(Integer userId) {
+        logger.debug("Trying to get all products with userId: " + userId);
+        return commentDao.showCommentsByUser(userId);
+    }
 
+    /**
+     * 根据productId获得所有评论
+     *
+     * @param productId 货品id
+     * @return 货品的评论列表
+     */
+    @Override
+    public List<Comment> showCommentsByProduct(Integer productId) {
+        logger.debug("Trying to get all products with productId: " + productId);
+        return commentDao.showCommentsByProduct(productId);
+    }
 }

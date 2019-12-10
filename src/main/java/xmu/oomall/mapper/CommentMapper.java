@@ -25,14 +25,14 @@ public interface CommentMapper {
      * @param comment 评论对象
      * @return 结果
      */
-    int addComment(Comment comment);
+    int insertComment(Comment comment);
 
     /**
      * 删除一个评论
-     * @param comment 评论对象
+     * @param id 评论对象
      * @return 结果
      */
-    int deleteComment(Comment comment);
+    int deleteComment(Integer id);
 
     /**
      * 更新一个评论

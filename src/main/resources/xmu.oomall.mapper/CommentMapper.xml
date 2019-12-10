@@ -2,57 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xmu.oomall.mapper.CommentMapper">
 
-    <select id="findCommentById" parameterType="Integer" resultType="comment">
+    <select id="findCommentById" parameterType="Integer" resultType="xmu.oomall.domain.Comment">
             select *
             from comment where id = #{id}
     </select>
 
     <!--    TODO: finish functions -->
-    <!--    TODO: fix parameterType -->
-    <insert id="addComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into comment(id, userId, content, statusCode, type, star, productId, topicId, gmtCreate, gmtModified, beDeleted )
+    <insert id="insertComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment(id, user_id, content, status_code, type, star, product_id, topic_id, gmt_create, gmt_modified, be_deleted )
         values (#{id},#{userId},#{content},#{statusCode},#{type},#{star},#{productId},#{topicId},#{gmtCreate},#{gmtModified},#{beDeleted})
     </insert>
 
-    <insert id="deleteComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
+    <delete id="deleteComment" parameterType="Integer">
         delete from comment where id = #{id}
-    </insert>
+    </delete>
 
-    <insert id="updateComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into comment(id, userId,content,statusCode,type,star,productId,topicId,gmtCreate,gmtModified,beDeleted )
-        values (:id,:user_id,:content,:status,:type,:star,:product_id,:topic_id,:gmt_create,:gmt_modified,:is_deleted )
---         values (#{id},#{user_id},#{content},#{status},#{type},#{star},#{product_id},#{topic_id},#{gmt_create},#{gmt_modified},#{is_deleted})
-    </insert>
+    <update id="updateComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
+        update comment set
+            content = #{content},
+            status_code = #{statusCode},
+            type = #{type},
+            star = #{star},
+            product_id = #{productId},
+            topic_id = #{topicId},
+            be_deleted = #{beDeleted}
+        where id = #{id}
+    </update>
 
-    <insert id="showCommentsByProduct" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-            select id,
-                userId,
-                content,
-                statusCode,
-                type,
-                star,
-                productId,
-                topicId,
-                gmtCreate,
-                gmtModified,
-                beDeleted
-            from oomall_comment where id = #{id}
-    </insert>
+    <select id="showCommentsByProduct" parameterType="Integer">
+            select *
+            from comment where productId = #{product_id}
+    </select>
 
-    <insert id="showCommentsByUser" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-            select id,
-                userId,
-                content,
-                statusCode,
-                type,
-                star,
-                productId,
-                topicId,
-                gmtCreate,
-                gmtModified,
-                beDeleted
-            from comment where id = #{id}
-    </insert>
+    <select id="showCommentsByUser" parameterType="Integer">
+            select *
+            from comment where userId = #{user_id}
+    </select>
 
 
 </mapper>

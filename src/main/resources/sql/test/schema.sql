@@ -328,19 +328,18 @@ DROP TABLE IF EXISTS `comment`;
 
 
 CREATE TABLE `comment` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
+  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(11) unsigned DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
-  `status_code` tinyint(1) DEFAULT NULL,
-  `type` tinyint(1) DEFAULT NULL,
-  `star` tinyint(1) DEFAULT NULL,
-  `product_id` bigint(20) DEFAULT NULL,
-  `topic_id` int(11) DEFAULT NULL,
-  `gmt_create` datetime DEFAULT NULL,
-  `gmt_modified` datetime DEFAULT NULL,
-  `be_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `comment_id_index` (`id`)
+  `status_code` tinyint(2) DEFAULT NULL,
+  `type` tinyint(1) unsigned DEFAULT NULL,
+  `star` tinyint(1) unsigned DEFAULT NULL,
+  `product_id` bigint(11) unsigned DEFAULT NULL,
+  `topic_id` bigint(11) unsigned DEFAULT NULL,
+  `gmt_create` datetime(2) DEFAULT NULL,
+  `gmt_modified` datetime(2) DEFAULT NULL,
+  `be_deleted` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 

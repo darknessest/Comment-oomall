@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  * @author byl
  * get /commentCreate 方法返回的VO
  */
-public class CommentCreateVo {
+public class CommentVo {
     private Integer id;
     /**
      * 发表评论的用户的id
