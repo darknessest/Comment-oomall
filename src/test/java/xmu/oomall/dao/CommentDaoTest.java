@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles({"test"})
-//@Sql({"/sql/test/schema.sql"})
+@Sql({"/sql/test/schema.sql"})
 @SpringBootTest(classes = OoMallApplication.class)
 class CommentDaoTest {
     @Autowired
@@ -46,7 +46,6 @@ class CommentDaoTest {
         cmnt.setUserId(123);
         cmnt.setStar((short) 3);
         cmnt.setContent("Cool stuff!");
-        cmnt.setType((short) 2);
         cmnt.setProductId(533);
         cmnt.setStatusCode((short) 0);
 

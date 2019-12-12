@@ -53,7 +53,6 @@ public class CommentControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andReturn().getResponse().getContentAsString();
 
-
         System.out.println(responseString);
     }
 
@@ -69,8 +68,6 @@ public class CommentControllerTest {
         cmnt.setProductId(56);
         cmnt.setStar((short) 5);
         cmnt.setStatusCode((short) 2);
-        cmnt.setTopicId(83);
-        cmnt.setType((short) 1);
         cmnt.setUserId(234);
 
 

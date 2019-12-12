@@ -323,27 +323,21 @@ INSERT INTO `promotion` VALUES (1,'2019-12-01 09:14:38','2019-12-07 09:14:56','p
 --
 
 DROP TABLE IF EXISTS `comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-
-
 CREATE TABLE `comment` (
   `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(11) unsigned DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
-  `status_code` tinyint(2) DEFAULT NULL,
-  `type` tinyint(1) unsigned DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
   `star` tinyint(1) unsigned DEFAULT NULL,
   `product_id` bigint(11) unsigned DEFAULT NULL,
-  `topic_id` bigint(11) unsigned DEFAULT NULL,
   `gmt_create` datetime(2) DEFAULT NULL,
   `gmt_modified` datetime(2) DEFAULT NULL,
-  `be_deleted` tinyint(1) unsigned DEFAULT '0',
+  `is_deleted` tinyint(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 );
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO `comment`(id, user_id, content, status_code, type, star, product_id, topic_id) VALUES (10011, 123, 'Great product!', 2, 4, 5, 12412, 22);
+
+INSERT INTO `comment`(id, user_id, content, status, star, product_id) VALUES (10011, 123, 'Great product!', 2, 4, 110);
 
 --
 -- Dumping data for table `comment`

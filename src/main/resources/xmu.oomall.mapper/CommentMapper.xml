@@ -8,8 +8,8 @@
     </select>
 
     <insert id="insertComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
-        insert into comment(id, user_id, content, status_code, type, star, product_id, topic_id, gmt_create, gmt_modified, be_deleted )
-        values (#{id},#{userId},#{content},#{statusCode},#{type},#{star},#{productId},#{topicId},#{gmtCreate},#{gmtModified},#{beDeleted})
+        insert into comment(id, user_id, content, status, star, product_id, gmt_create, gmt_modified, is_deleted )
+        values (#{id},#{userId},#{content},#{statusCode},#{star},#{productId},#{gmtCreate},#{gmtModified},#{beDeleted})
     </insert>
 
     <delete id="deleteComment" parameterType="Integer">
@@ -19,14 +19,11 @@
     <update id="updateComment" parameterType="xmu.oomall.domain.Comment" useGeneratedKeys="true" keyProperty="id">
         update comment set
             content = #{content},
-            status_code = #{statusCode},
-            type = #{type},
+            status = #{statusCode},
             star = #{star},
             product_id = #{productId},
-            topic_id = #{topicId},
-            be_deleted = #{beDeleted},
             gmt_modified = #{gmtModified},
-            be_deleted = #{beDeleted}
+            is_deleted = #{beDeleted}
         where id = #{id}
     </update>
 

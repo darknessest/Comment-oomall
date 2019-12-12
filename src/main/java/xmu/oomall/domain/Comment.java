@@ -25,10 +25,7 @@ public class Comment {
      * 评论的状态 0：未审核 1：审核通过 2：审核失败
      */
     private Short statusCode;
-    /**
-     * 发表评论的类型
-     */
-    private Short type;
+
     /**
      * 发表评论的星级
      */
@@ -37,10 +34,7 @@ public class Comment {
      * 评论的产品的id
      */
     private Integer productId;
-    /**
-     * 评论的专题的id
-     */
-    private Integer topicId;
+
 
     private LocalDateTime gmtCreate;
     private LocalDateTime gmtModified;
@@ -53,10 +47,8 @@ public class Comment {
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
                 ", statusCode=" + statusCode +
-                ", type=" + type +
                 ", star=" + star +
                 ", productId=" + productId +
-                ", topicId=" + topicId +
                 ", gmtCreate=" + gmtCreate +
                 ", gmtModified=" + gmtModified +
                 ", beDeleted=" + beDeleted +
@@ -112,14 +104,6 @@ public class Comment {
         this.statusCode = statusCode;
     }
 
-    public Short getType() {
-        return type;
-    }
-
-    public void setType(Short type) {
-        this.type = type;
-    }
-
     public Short getStar() {
         return star;
     }
@@ -134,14 +118,6 @@ public class Comment {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
-    }
-
-    public Integer getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
     }
 
     public LocalDateTime getGmtCreate() {

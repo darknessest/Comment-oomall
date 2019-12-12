@@ -35,13 +35,12 @@ public class CommentServiceImpl implements CommentService {
          */
 
         String productId = Integer.toString(comment.getProductId());
-        String topicId = Integer.toString(comment.getTopicId());
         String userId = Integer.toString(comment.getUserId());
 
         String numOfcomments = Integer.toString(commentDao.showCommentsByUser(comment.getUserId()).size() + 1);
 
-        String id = productId + topicId + userId + numOfcomments;
-        // String id = "" + productId + topicId + userId + numOfcomments;
+        String id = productId + userId + numOfcomments;
+        // String id = "" + productId + userId + numOfcomments;
         logger.debug("Newly generated Id: " + id);
         // return the formed integer
         return Integer.parseInt(id);
