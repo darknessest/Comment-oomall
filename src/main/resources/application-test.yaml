@@ -1,19 +1,16 @@
+
 spring:
-  profiles.active: test
   datasource:
     #JDBC驱动的名称
     driver-class-name: com.mysql.cj.jdbc.Driver
     #数据库的JDBC url
-#    TODO: 更改设置，在测试文件里删掉 @sql行
-#    url: jdbc:h2:mem:test;MODE=MYSQL
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:h2:mem:test;MODE=MYSQL
     #数据库用户名
-    data-username: root
-#    username: root
+    data-username: test
     #数据库密码
-    password: 
+    password: test
     #建表的SQL
-    schema: classpath:sql/test/schema.sql
+    schema: classpath:sql/schema.sql
     #当数据库为内嵌数据库时，如h2，则执行初始化SQL
     initialization-mode: embedded
     #当上述SQL中有错误时，则终止执行
@@ -22,12 +19,12 @@ spring:
     sql-script-encoding: utf-8
     druid:
       validation-query: select 1
-  h2:
-    console:
-      #开启好h2的控制内核
-      enabled: true
-      settings:
-        #不允许远程访问
-        web-allow-others: false
+#  h2:
+#    console:
+#      #开启好h2的控制内核
+#      enabled: true
+#      settings:
+#        #不允许远程访问
+#        web-allow-others: false
 
 

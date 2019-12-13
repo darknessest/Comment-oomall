@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.10.32.48:3306/oomall
-    username: ooadUser
-    password: ooad
+    url: jdbc:mysql://47.100.32.48:3306/oomall?useUnicode=true&characterEncoding=utf8
+    username: test
+    password: test
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       #初始化时建立物理连接的个数
@@ -26,16 +26,9 @@ spring:
           slow-sql-millis: 100
       validation-query: select 1
   redis:
-    host: 47.52.88.176
-    password: ooadPass
+    host: 47.100.32.48
+    port: 6379
+    password: ooad
 
-mybatis:
-  #domain对象的包
-  type-aliases-package: xmu.oomall.domain
-  #mapper。xml所在的位置
-  mapper-locations: classpath:xmu.oomall.mapper/*.xml
-  configuration:
-    #自动将SQL中查出来的带下划线的字段，转换为驼峰标志，再去匹配类中的属性
-    map-underscore-to-camel-case: true
 
 

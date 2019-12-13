@@ -6,11 +6,6 @@ spring:
     name: oomall
   profiles:
     active: dev
-    jpa:
-      hibernate:
-        naming:
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
 
 management:
   endpoint:
@@ -23,9 +18,9 @@ management:
 
 mybatis:
   #domain对象的包
-  type-aliases-package: xmu.oomall.domain
-  #mapper。xml所在的位置
-  mapper-locations: classpath:xmu.oomall.mapper/*.xml
+  type-aliases-package: xmu.oomall.comment.domain
+  #mapper.xml所在的位置
+  mapper-locations: classpath:xmu.oomall.comment.mapper/*.xml
   configuration:
     #自动将SQL中查出来的带下划线的字段，转换为驼峰标志，再去匹配类中的属性
     map-underscore-to-camel-case: true
@@ -45,7 +40,7 @@ logging:
     xmu.oomall.util: debug
   #使用logback日志，取代默认的common日志
   file:
-    path: log
+    path: C:\Projects\oomall\comment\log
   config: classpath:logback-spring.xml
 
 oomall:
